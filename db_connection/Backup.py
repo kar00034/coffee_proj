@@ -21,6 +21,7 @@ class BackupRestore:
         try:
             conn = ExplicitlyConnectionPool.get_instance().get_connection()
             cursor = conn.cursor()
+            cursor.execute("use coffee")
             source_path = self.source_dir + filename
 
             backup_sql = "SELECT * FROM {} INTO OUTFILE '{}' {}".format(table_name, source_path, BackupRestore.OPTION)
@@ -37,6 +38,7 @@ class BackupRestore:
     def data_restore(self, table_name):
         conn = ExplicitlyConnectionPool.get_instance().get_connection()
         cursor = conn.cursor()
+        cursor.execute("use coffee")
         filename = table_name + '.txt'
         try:
             source_path = self.source_dir + filename
