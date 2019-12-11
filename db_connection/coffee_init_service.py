@@ -1,3 +1,4 @@
+from PyQt5.QtWidgets import QMessageBox
 from mysql.connector import errorcode, Error
 
 from db_connection.explicitly_connection_pool import ExplicitlyConnectionPool
@@ -5,8 +6,10 @@ from db_connection.read_ddl import read_ddl_file
 
 
 class DbInit:
+    a = 0
     def __init__(self):
         self._db = read_ddl_file()
+
 
     def __create_database(self):
         try:
@@ -23,6 +26,7 @@ class DbInit:
                 print("CREATE DATABASE {}".format(self._db['database_name']))
             else:
                 print(err.msg)
+                self.a += 1
         finally:
             cursor.close()
             conn.close()
@@ -41,10 +45,12 @@ class DbInit:
                         print("already exists.")
                     else:
                         print(err.msg)
+                        self.a += 1
                 else:
                     print("OK")
         except Error as err:
             print(err)
+            self.a += 1
         finally:
             cursor.close()
             conn.close()
@@ -58,6 +64,7 @@ class DbInit:
             print("OK")
         except Error as err:
             print(err)
+            self.a += 1
         finally:
             cursor.close()
             conn.close()
@@ -66,3 +73,4 @@ class DbInit:
         self.__create_database()
         self.__create_table()
         self.__create_user()
+        return self.a

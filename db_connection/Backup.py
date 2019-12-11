@@ -12,7 +12,7 @@ class BackupRestore:
         LINES TERMINATED by '\r\n';
         """
 
-    def __init__(self, source_dir='/home/jh/PycharmProjects/python_mysql_study/restore_backup/data/', data_dir='/home/jh/PycharmProjects/python_mysql_study/restore_backup/data/'):
+    def __init__(self, source_dir='/home/jh/PycharmProjects/coffee_proj/data/', data_dir='/home/jh/PycharmProjects/coffee_proj/data/'):
         self.source_dir = source_dir
         self.data_dir = data_dir
 

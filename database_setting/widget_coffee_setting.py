@@ -1,8 +1,9 @@
 from PyQt5 import uic
-from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.QtWidgets import QWidget, QMessageBox
 
 from db_connection.Backup import BackupRestore
 from db_connection.coffee_init_service import DbInit
+from mysql.connector import Error
 
 
 class Coffee(QWidget):
@@ -15,14 +16,25 @@ class Coffee(QWidget):
         btn_backup = self.ui.btn_backup.clicked.connect(self.Backup)
         btn_restore = self.ui.btn_restore.clicked.connect(self.Restore)
 
+    def msgbox1(self):
+        QMessageBox.information(self, "Success", "초기화 성공")
+
+    def msgbox2(self):
+        QMessageBox.information(self, "Failed", "초기화 실패")
+
     def coffee_init(self):
         db = DbInit()
-        db.service()
+        # db.service()
+        if db.service() == 0:
+            self.msgbox1()
+        else:
+            self.msgbox2()
 
     def Backup(self):
         br = BackupRestore()
         br.data_backup(table_name='product')
         br.data_backup(table_name='sale')
+
 
     def Restore(self):
         br = BackupRestore()
