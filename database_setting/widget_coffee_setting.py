@@ -3,7 +3,6 @@ from PyQt5.QtWidgets import QWidget, QMessageBox
 
 from db_connection.Backup import BackupRestore
 from db_connection.coffee_init_service import DbInit
-from mysql.connector import Error
 
 
 class Coffee(QWidget):
