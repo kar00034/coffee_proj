@@ -21,6 +21,12 @@ class Coffee(QWidget):
     def msgbox2(self):
         QMessageBox.information(self, "Failed", "초기화 실패")
 
+    def msgbox3(self):
+        QMessageBox.information(self, "Success", "백업 성공")
+
+    def msgbox4(self):
+        QMessageBox.information(self, "Success", "복구 성공")
+
     def coffee_init(self):
         db = DbInit()
         # db.service()
@@ -33,10 +39,12 @@ class Coffee(QWidget):
         br = BackupRestore()
         br.data_backup(table_name='product')
         br.data_backup(table_name='sale')
+        self.msgbox3()
 
 
     def Restore(self):
         br = BackupRestore()
         br.data_restore(table_name='product')
         br.data_restore(table_name='sale')
+        self.msgbox4()
 
